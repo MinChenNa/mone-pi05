@@ -1,5 +1,7 @@
 # Independent-episode validation
 
+> 历史记录：本页保留当时的计划与实验进展，后续 full18 与持续记忆结果见 [2026-10-08 实验总结](docs/MONE_PI05_RESULTS.md)。后续结果状态以该总结为准。
+
 The four 100-step adapters were trained on episodes 0, 1, 2, 10. This validation
 excludes those episodes from both evaluation samples and donor histories.
 It does not establish independence from the original pi0.5 pretraining or from
