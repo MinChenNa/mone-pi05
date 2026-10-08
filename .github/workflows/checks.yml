@@ -1,0 +1,29 @@
+name: Code checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  cpu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CPU test dependencies
+        run: |
+          python -m pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install pytest numpy
+      - name: Compile project Python sources
+        run: python -m compileall -q openpi/src openpi/scripts
+      - name: Check shell syntax
+        run: find openpi/scripts -name '*.sh' -print0 | xargs -0 -n1 bash -n
+      - name: Test memory and training objective
+        env:
+          PYTHONPATH: openpi/src:openpi
+        run: >-
+          python -m pytest --confcutdir=openpi/src/openpi/models_pytorch
+          openpi/src/openpi/models_pytorch/mone_layer_test.py
+          openpi/scripts/mone_all_layers_test.py
+          openpi/scripts/mone_guard_test.py
+          openpi/scripts/mone_selective_objective_test.py -q

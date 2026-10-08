@@ -1,0 +1,25 @@
+# Local environments, assets and experiment output
+**/.venv/
+.tools/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+.uv-cache/
+assets/
+data/
+checkpoints/
+outputs/
+logs/
+wandb/
+**/.env
+**/.env.*
+!**/.env.example
+*.safetensors
+*.pt
+*.pth
+*.parquet
+*.tar.gz
+*.zip
+*.log
+.DS_Store
+.test-tmp/
